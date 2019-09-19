@@ -4,10 +4,11 @@
 
 #define _GNU_SOURCE
 
-#include &ltsched.h&gt
-#include &ltsignal.h&gt
-#include &ltsys/mman.h&gt
-#include &ltunistd.h&gt
+//put less,greater on includes(stupid html !@#$@)
+#include sched.h
+#include signal.h
+#include sys/mman.h
+#include unistd.h
 
 int somefunction(void *data)
 {

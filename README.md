@@ -4,7 +4,7 @@
 
 #define _GNU_SOURCE
 
-//put less,greater on includes(stupid html !@#$@)
+//put less,greater on includes(html !@#$@)
 #include sched.h
 #include signal.h
 #include sys/mman.h

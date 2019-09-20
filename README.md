@@ -22,6 +22,8 @@ int somefunction(void *data)
   //int len=sprintf(msg,"my name is\n");
   //write(STDOUT_FILENO,msg,len);
   
+  //send stop signal to pid
+  kill(getpid(),SIGSTOP);
   char msg[64];
   int len=sprintf(msg,"my name is\n");
   for(;;) {
@@ -42,8 +44,6 @@ int main()
   //use clone
   int pid=clone(somefunction,stack+size,CLONE_VM|SIGCHLD,NULL);
 
-  //send stop signal to pid
-  kill(pid,SIGSTOP);
   for(;;) {
     int i;
     for (i=1;i<10;i++) {

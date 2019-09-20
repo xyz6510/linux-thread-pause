@@ -22,13 +22,12 @@ int somefunction(void *data)
   //int len=sprintf(msg,"my name is\n");
   //write(STDOUT_FILENO,msg,len);
   
-  int pid=getpid();
   char msg[64];
   int len=sprintf(msg,"my name is\n");
   for(;;) {
   //do something
-    kill(pid,SIGSTOP);
     write(STDOUT_FILENO,msg,len);
+    sleep(1);
   }
   return 0;
 }
@@ -43,12 +42,15 @@ int main()
   //use clone
   int pid=clone(somefunction,stack+size,CLONE_VM|SIGCHLD,NULL);
 
+  //send stop signal to pid
+  kill(pid,SIGSTOP);
   for(;;) {
-    //send cont signals to pid
     int i;
     for (i=1;i<10;i++) {
       printf("%i\n",i);
-      if ((i%3)==0) kill(pid,SIGCONT);
+      //send cont,stop signals to pid
+      if (i==3) kill(pid,SIGCONT);
+      if (i==7) kill(pid,SIGSTOP);
       sleep(1);
     }
   }
